@@ -26,6 +26,7 @@ Forbidden scan classes: private organization/person/client names, direct private
 | `index.html` | yes | yes | yes |
 | `indexes/design-artifacts.md` | yes | yes | n/a |
 | `indexes/public-safety-audit.md` | yes | yes | n/a |
+| `indexes/repo-generated-image-gap-index.md` | yes | yes | n/a |
 | `inspiration-htmls/README.md` | yes | yes | n/a |
 | `inspiration-htmls/beautiful-html-templates/8-bit-orbit.html` | yes | yes | yes |
 | `inspiration-htmls/beautiful-html-templates/biennale-yellow.html` | yes | yes | yes |
@@ -82,6 +83,41 @@ Forbidden scan classes: private organization/person/client names, direct private
 | `inspiration-htmls/website-examples/website-example-11.html` | yes | yes | yes |
 | `prompts/article-hero.md` | yes | yes | n/a |
 | `prompts/og-image.md` | yes | yes | n/a |
+| `prompts/repo-og/11mhz-mcp.md` | yes | yes | n/a |
+| `prompts/repo-og/ALL.md` | yes | yes | n/a |
+| `prompts/repo-og/jsonl-vault-spike.md` | yes | yes | n/a |
+| `prompts/repo-og/life-os-starter.md` | yes | yes | n/a |
+| `prompts/repo-og/macos-save-to-obsidian.md` | yes | yes | n/a |
+| `prompts/repo-og/mega-vault-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-alteryx-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-ango-companion.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-archive-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-csv-tsv-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-diff-patch-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-eml-email-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-folder-sort-view.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-folder-sort-z-to-a.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-git-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-html-page-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-ics-calendar-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-log-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-newest-files.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-plist-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-python-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-script-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-slide-deck-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-sql-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-test-vault.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-toml-ini-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-txt-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-vcf-contacts-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-word-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-xlsx-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/obsidian-xml-viewer.md` | yes | yes | n/a |
+| `prompts/repo-og/sap-agent-context.md` | yes | yes | n/a |
+| `prompts/repo-og/vault-layer.md` | yes | yes | n/a |
+| `prompts/repo-og/vault-schema.md` | yes | yes | n/a |
+| `prompts/repo-og/viggomeesters-assets.md` | yes | yes | n/a |
 | `scripts/public_safety_audit.py` | yes | yes | n/a |
 | `style-files/README.md` | yes | yes | n/a |
 | `viggomeesters-htmls/README.md` | yes | yes | n/a |
@@ -105,6 +141,6 @@ Forbidden scan classes: private organization/person/client names, direct private
 | `viggomeesters-htmls/jsonl-agent-first-data-structures.html` | yes | yes | yes |
 | `viggomeesters-htmls/sap-agent-context.html` | yes | yes | yes |
 
-Total files checked: 96
+Total files checked: 132
 Files with name/content hits: 0
 HTML/SVG render issues: 0

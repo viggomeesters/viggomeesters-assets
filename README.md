@@ -17,6 +17,7 @@ This repository is the public-safe source for the ViggoMeesters visual asset sys
 - `inspiration-htmls/` — public-safe generic HTML inspiration: beautiful-html templates, rendered anonymized brand HTML templates, and anonymized website examples.
 - `style-files/` — no private/client CSS is published; see README there for the anonymization rule.
 - `indexes/design-artifacts.md` — searchable index of copied HTML/CSS artifacts with provenance and reuse notes.
+- `indexes/repo-generated-image-gap-index.md` — active public repo image-gap index with copy-pasteable repo OG prompts.
 - `indexes/public-safety-audit.md` — one-row-per-file check for anonymized name, anonymized content, and rendered/nonblank status.
 
 ## Public-safety boundary
