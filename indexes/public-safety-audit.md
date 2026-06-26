@@ -16,6 +16,8 @@ Forbidden scan classes: private organization/person/client names, direct private
 | `README.md` | yes | yes | n/a |
 | `SECURITY.md` | yes | yes | n/a |
 | `STYLE.md` | yes | yes | n/a |
+| `assets/blog/cli-agents-guide-hero.jpg` | yes | yes | n/a |
+| `assets/blog/cli-agents-guide-hero.prompt.md` | yes | yes | n/a |
 | `assets/hero.svg` | yes | yes | yes |
 | `assets/references/README.md` | yes | yes | n/a |
 | `examples/database-types-agent-first-systems-filled-prompt.md` | yes | yes | n/a |
@@ -82,6 +84,7 @@ Forbidden scan classes: private organization/person/client names, direct private
 | `scripts/public_safety_audit.py` | yes | yes | n/a |
 | `style-files/README.md` | yes | yes | n/a |
 | `viggomeesters-htmls/README.md` | yes | yes | n/a |
+| `viggomeesters-htmls/cli-agents-guide.html` | yes | yes | yes |
 | `viggomeesters-htmls/database-types-agent-first-systems.html` | yes | yes | yes |
 | `viggomeesters-htmls/design-variants/README.md` | yes | yes | n/a |
 | `viggomeesters-htmls/design-variants/index.html` | yes | yes | yes |
@@ -101,6 +104,6 @@ Forbidden scan classes: private organization/person/client names, direct private
 | `viggomeesters-htmls/jsonl-agent-first-data-structures.html` | yes | yes | yes |
 | `viggomeesters-htmls/sap-agent-context.html` | yes | yes | yes |
 
-Total files checked: 92
+Total files checked: 95
 Files with name/content hits: 0
 HTML/SVG render issues: 0

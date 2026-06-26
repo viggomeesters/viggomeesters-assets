@@ -11,6 +11,7 @@ This repository is the public-safe source for the ViggoMeesters visual asset sys
 - `STYLE.md` — canonical visual style contract.
 - `prompts/` — reusable prompt templates for article heroes, Open Graph images, and related static-site assets.
 - `assets/references/` — public-safe reference images and descriptions that future image prompts can cite.
+- `assets/blog/` — mirrored public article hero images and prompt/provenance records.
 - `examples/` — filled prompt examples for published articles.
 - `viggomeesters-htmls/` — copied public-site HTML pages that define the canonical viggomeesters.com article/site feel.
 - `inspiration-htmls/` — public-safe generic HTML inspiration: beautiful-html templates, rendered anonymized brand HTML templates, and anonymized website examples.
