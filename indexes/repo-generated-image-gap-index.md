@@ -10,6 +10,8 @@ Scope: active, public, non-fork repositories under `github.com/viggomeesters`. A
 
 ## Copy-paste prompt bundle
 
+Canonical style/reference repo: `https://github.com/viggomeesters/viggomeesters-assets`.
+
 - All prompts in one file: [`prompts/repo-og/ALL.md`](../prompts/repo-og/ALL.md)
 - Individual prompt files: `prompts/repo-og/<repo>.md`
 

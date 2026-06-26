@@ -2,7 +2,7 @@
 
 Asset metadata:
 - Website: viggomeesters.com
-- Source style repo: viggomeesters-assets
+- Source style repo: viggomeesters-assets (`https://github.com/viggomeesters/viggomeesters-assets`)
 - Target GitHub repo: https://github.com/viggomeesters/obsidian-archive-viewer
 - Repo slug: obsidian-archive-viewer
 - Repo title: Obsidian Archive Viewer
@@ -14,10 +14,11 @@ Asset metadata:
 - Creation route: copy this prompt into an image-generation tool such as ChatGPT image generation; save the generated raster as JPEG/PNG/WebP, not SVG.
 
 Style references:
-- `STYLE.md`
-- `prompts/og-image.md`
-- `assets/blog/cli-agents-guide-hero.jpg` as the current generated-raster style anchor
-- `viggomeesters-htmls/cli-agents-guide.html` for current article/card feel
+- `https://github.com/viggomeesters/viggomeesters-assets` as the canonical style/reference repo
+- `STYLE.md` from viggomeesters-assets
+- `prompts/og-image.md` from viggomeesters-assets
+- `assets/blog/cli-agents-guide-hero.jpg` from viggomeesters-assets as the current generated-raster style anchor
+- `viggomeesters-htmls/cli-agents-guide.html` from viggomeesters-assets for current article/card feel
 
 Prompt:
 ```text
@@ -33,7 +34,7 @@ Repository context:
 - Style version: viggomeesters-dark-editorial-code-card-v1
 
 Visual style:
-Match viggomeesters.com: proof-first personal technical site; dark static-site portfolio aesthetic; calm editorial code-card composition; readable systems diagramming; subtle aurora/glass accents; precise source-backed labels; no generic SaaS/stock/cyberpunk styling.
+Use the public viggomeesters-assets repo as the style pack: https://github.com/viggomeesters/viggomeesters-assets. Match viggomeesters.com: proof-first personal technical site; dark static-site portfolio aesthetic; calm editorial code-card composition; readable systems diagramming; subtle aurora/glass accents; precise source-backed labels; no generic SaaS/stock/cyberpunk styling.
 Use dark charcoal background (#0c0c0f / #141418), soft off-white typography, muted slate secondary text, fine low-alpha borders, and restrained blue/cyan/purple/green/amber accents.
 
 Core visual motif:
@@ -59,7 +60,7 @@ No SVG output, no stock-photo people, no cartoon mascot, no generic cloud clipar
 Provenance to save next to the generated image:
 ```yaml
 site: viggomeesters.com
-style_repo: viggomeesters-assets
+style_repo: https://github.com/viggomeesters/viggomeesters-assets
 target_repo: viggomeesters/obsidian-archive-viewer
 repo_title: Obsidian Archive Viewer
 asset_type: repo_open_graph
