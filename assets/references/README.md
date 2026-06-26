@@ -13,7 +13,8 @@ Each reference should have:
 The notes file should explain:
 
 - source page or repo;
-- whether the image is generated or hand-authored;
+- creation route: where/how the image was made or received;
+- whether the image is generated, supplied, or hand-authored;
 - style traits worth preserving;
 - public-safety review notes;
 - whether it can be used as a direct style anchor.

@@ -115,10 +115,11 @@ Prompt/provenance should identify:
 - website and repo consumer;
 - article slug/title/date;
 - asset type;
+- **creation route**: where/how the image was made or received, e.g. ChatGPT image generator, Hermes/FAL, hand-authored SVG, or provided by Viggo via Telegram;
 - style version;
 - template used;
 - references used;
-- final prompt;
+- final prompt or enough instruction to recreate the asset;
 - generation backend if known.
 
 ## Generator handoff

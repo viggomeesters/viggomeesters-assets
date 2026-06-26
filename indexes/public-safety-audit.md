@@ -18,6 +18,7 @@ Forbidden scan classes: private organization/person/client names, direct private
 | `STYLE.md` | yes | yes | n/a |
 | `assets/blog/cli-agents-guide-hero.jpg` | yes | yes | n/a |
 | `assets/blog/cli-agents-guide-hero.prompt.md` | yes | yes | n/a |
+| `assets/hero.notes.md` | yes | yes | n/a |
 | `assets/hero.svg` | yes | yes | yes |
 | `assets/references/README.md` | yes | yes | n/a |
 | `examples/database-types-agent-first-systems-filled-prompt.md` | yes | yes | n/a |
@@ -104,6 +105,6 @@ Forbidden scan classes: private organization/person/client names, direct private
 | `viggomeesters-htmls/jsonl-agent-first-data-structures.html` | yes | yes | yes |
 | `viggomeesters-htmls/sap-agent-context.html` | yes | yes | yes |
 
-Total files checked: 95
+Total files checked: 96
 Files with name/content hits: 0
 HTML/SVG render issues: 0
