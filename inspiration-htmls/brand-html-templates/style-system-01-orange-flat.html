@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flat orange consulting report system</title>
+<style>
+/* Public-safe rendered sample generated from anonymized local style source. */
+/* Consulting Studio — Document Stylesheet v7 (Cover + TOC + Dashboard)
+   Source: CONSULTING STUDIO-STYLEGUIDE_v21.pdf
+   Brand: #EC6608 (Consulting Studio Orange), Raleway (titles), flat design
+   Pipeline: pandoc → HTML → Chrome headless → PDF
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+@page {
+  size: A4;
+  margin: 2.4cm 2.2cm 2.5cm 2.2cm;
+}
+
+@page {
+  @bottom-center {
+    content: counter(page);
+    font-family: 'Raleway', sans-serif;
+    font-size: 8pt;
+    color: #AAA;
+  }
+}
+
+@page :first {
+  margin: 0;
+  @bottom-center { content: none; }
+}
+
+/* ══════════════════════════════════════════════════
+   COVER PAGE
+   ══════════════════════════════════════════════════ */
+.cover-page {
+  position: relative;
+  background: #EC6608;
+  margin: 0;
+  padding: 3.5cm 2.8cm 2.5cm 2.8cm;
+  height: 297mm;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  page-break-after: always;
+  overflow: hidden;
+}
+
+.cover-page .cover-title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 36pt;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0; padding: 0;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  border-bottom: none;
+}
+
+.cover-page .cover-title::after { display: none; }
+
+.cover-page .cover-subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-size: 13pt;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0.6cm 0 0 0;
+  line-height: 1.5;
+}
+
+.cover-page .cover-author {
+  font-family: 'Raleway', sans-serif;
+  font-size: 11pt;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 1.5cm 0 0 0;
+}
+
+.cover-page .cover-date {
+  font-family: 'Raleway', sans-serif;
+  font-size: 10pt;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0.2cm 0 0 0;
+}
+
+.cover-logo {
+  width: 140px;
+  align-self: center;
+  filter: brightness(0) invert(1);
+  margin-top: auto;
+}
+
+/* ══════════════════════════════════════════════════
+   TABLE OF CONTENTS
+   ══════════════════════════════════════════════════ */
+.toc-page {
+  page-break-after: always;
+  padding-top: 1cm;
+}
+
+.toc-heading {
+  font-family: 'Raleway', sans-serif;
+  font-size: 22pt;
+  font-weight: 800;
+  color: #EC6608;
+  margin: 0 0 1cm 0;
+  padding: 0;
+  page-break-before: avoid;
+  letter-spacing: -0.01em;
+}
+
+.toc-page .toc-heading { page-break-before: avoid; }
+
+.toc-heading::after {
+  content: '';
+  display: block;
+  width: 3cm;
+  height: 3px;
+  background: #EC6608;
+  margin-top: 0.4cm;
+  border-radius: 2px;
+}
+
+.toc ul { list-style: none; padding: 0; margin: 0; }
+
+.toc > ul > li {
+  margin: 0; padding: 0;
+  border-bottom: 1px solid #F0E8E0;
+}
+
+.toc > ul > li > a {
+  font-family: 'Raleway', sans-serif;
+  font-size: 11pt;
+  font-weight: 600;
+  color: #1A1A1A;
+  text-decoration: none;
+  display: block;
+  padding: 0.35cm 0;
+}
+
+.toc > ul > li > ul {
+  list-style: none;
+  padding: 0 0 0.2cm 0.8cm;
+  margin: 0;
+  border-left: 2px solid #EC6608;
+}
+
+.toc > ul > li > ul > li { margin: 0; }
+
+.toc > ul > li > ul > li > a {
+  font-family: 'Raleway', sans-serif;
+  font-size: 9.5pt;
+  font-weight: 500;
+  color: #555;
+  text-decoration: none;
+  display: block;
+  padding: 0.15cm 0;
+}
+
+.toc > ul > li > ul > li > ul { display: none; }
+
+/* ══════════════════════════════════════════════════
+   PAGE FOOTER
+   ══════════════════════════════════════════════════ */
+.page-footer { position: fixed; bottom: 0; right: 0; z-index: 100; }
+.footer-logo { width: 70px; opacity: 0.25; }
+
+/* ══════════════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════════════ */
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 10.5pt;
+  line-height: 1.65;
+  color: #2A2A2A;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 30pt;
+  font-weight: 800;
+  color: #EC6608;
+  margin: 0 0 0.3cm 0;
+  padding: 0.8cm 0 0.5cm 0;
+  border-bottom: none;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 4cm;
+  height: 4px;
+  background: #EC6608;
+  margin-top: 0.4cm;
+  border-radius: 2px;
+}
+
+h1 + p {
+  font-family: 'Raleway', sans-serif;
+  font-size: 10.5pt;
+  color: #888;
+  margin-bottom: 1cm;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+h2 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16pt;
+  font-weight: 800;
+  color: #EC6608;
+  margin: 1.4cm 0 0.5cm 0;
+  padding: 0;
+  letter-spacing: -0.01em;
+  page-break-before: always;
+  page-break-after: avoid;
+}
+
+body > h2:first-of-type { page-break-before: avoid; }
+
+h3 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 11pt;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin: 0.8cm 0 0.3cm 0;
+  padding: 0.15cm 0 0.15cm 0.5cm;
+  border-left: 3px solid #EC6608;
+  page-break-after: avoid;
+}
+
+h4 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: #444;
+  margin: 0.5cm 0 0.2cm 0;
+}
+
+p { margin: 0 0 0.35cm 0; }
+
+/* ── Tables ── */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  margin: 0.5cm 0 0.7cm 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 9pt;
+  font-weight: 500;
+  line-height: 1.45;
+  page-break-inside: avoid;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+thead th {
+  background: #EC6608;
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 9px 12px;
+  text-align: left;
+  font-size: 8.5pt;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: none;
+}
+
+tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #F0E8E0;
+  vertical-align: top;
+  color: #333;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: #FDF8F4; }
+tbody tr:nth-child(odd) { background: #FFFFFF; }
+tbody td strong { color: #1A1A1A; font-weight: 700; }
+
+/* ── Lists — Custom orange markers ── */
+ul, ol {
+  margin: 0.25cm 0 0.45cm 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+li {
+  margin-bottom: 0.2cm;
+  line-height: 1.6;
+  padding-left: 1.2em;
+  position: relative;
+}
+
+li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #EC6608;
+}
+
+li strong {
+  font-family: 'Raleway', sans-serif;
+  color: #1A1A1A;
+  font-weight: 600;
+}
+
+li > ul, li > ol {
+  margin: 0.1cm 0 0.15cm 0;
+}
+
+li > ul > li::before,
+li > ol > li::before {
+  width: 4px;
+  height: 4px;
+  background: #DDD;
+  top: 0.6em;
+}
+
+/* Reset for special list types */
+.toc ul li::before,
+.toc ul li { padding-left: 0; }
+.toc ul li::before { display: none; }
+.next-week li::before { display: none; }
+
+/* ── HR ── */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, #EC6608, #EC6608 30%, transparent);
+  margin: 1cm 0;
+  opacity: 0.3;
+}
+
+/* ── Links ── */
+a { color: #EC6608; text-decoration: none; }
+
+/* ── Code ── */
+code {
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  font-size: 8.5pt;
+  background: #FFF5EE;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #B85C00;
+}
+
+pre {
+  background: #FFF8F3;
+  padding: 0.45cm 0.5cm;
+  border-left: 3px solid #EC6608;
+  border-radius: 0 6px 6px 0;
+  font-size: 8.5pt;
+  line-height: 1.4;
+  margin: 0.35cm 0;
+}
+
+pre code { background: none; }
+
+/* ── Blockquotes ── */
+blockquote {
+  border-left: 3px solid #EC6608;
+  margin: 0.5cm 0;
+  padding: 0.3cm 0.7cm;
+  background: #FFF8F3;
+  color: #555;
+  font-size: 10pt;
+  border-radius: 0 6px 6px 0;
+}
+
+blockquote p:last-child { margin-bottom: 0; }
+
+strong { color: #1A1A1A; font-weight: 600; }
+
+/* ══════════════════════════════════════════════════
+   SCORECARD — Visual metric cards with accent colors
+   ══════════════════════════════════════════════════ */
+.scorecard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 0.6cm 0 0.8cm 0;
+}
+
+.metric-card {
+  background: #FFFFFF;
+  border: 1px solid #F0E8E0;
+  border-radius: 12px;
+  padding: 18px 22px;
+  border-top: 3px solid #EC6608;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle gradient shimmer in top-right corner */
+.metric-card::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(236, 102, 8, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Accent color variants */
+.metric-card.accent-green  { border-top-color: #2D8A4E; }
+.metric-card.accent-green::after { background: radial-gradient(circle, rgba(45, 138, 78, 0.06) 0%, transparent 70%); }
+.metric-card.accent-blue   { border-top-color: #2D6B8A; }
+.metric-card.accent-blue::after { background: radial-gradient(circle, rgba(45, 107, 138, 0.06) 0%, transparent 70%); }
+.metric-card.accent-purple { border-top-color: #7B4EA3; }
+.metric-card.accent-purple::after { background: radial-gradient(circle, rgba(123, 78, 163, 0.06) 0%, transparent 70%); }
+
+/* Pandoc wraps spans in <p> */
+.metric-card p,
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-card p { margin: 0; }
+
+.metric-card .metric-label {
+  font-family: 'Raleway', sans-serif;
+  font-size: 8pt;
+  font-weight: 700;
+  color: #AAA;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.metric-card .metric-value {
+  font-family: 'Raleway', sans-serif;
+  font-size: 28pt;
+  font-weight: 800;
+  color: #1A1A1A;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.metric-card .metric-prev {
+  font-family: 'Raleway', sans-serif;
+  font-size: 8.5pt;
+  font-weight: 500;
+  color: #CCC;
+}
+
+.metric-card .metric-delta {
+  font-family: 'Raleway', sans-serif;
+  font-size: 8.5pt;
+  font-weight: 700;
+  margin-top: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.metric-delta.positive { color: #1B6E35; background: #E8F5E9; }
+.metric-delta.negative { color: #9A2020; background: #FFEBEE; }
+.metric-delta.neutral  { color: #B85C00; background: #FFF3E0; }
+.metric-delta.new      { color: #B85C00; background: #FFF3E0; }
+
+/* ══════════════════════════════════════════════════
+   RODE DRAAD — Highlight banner
+   ══════════════════════════════════════════════════ */
+.rode-draad {
+  background: linear-gradient(135deg, #FFF8F3 0%, #FFF1E8 100%);
+  border-left: 4px solid #EC6608;
+  border-radius: 0 12px 12px 0;
+  padding: 20px 28px;
+  margin: 0.8cm 0 1cm 0;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 11pt;
+  line-height: 1.75;
+  color: #444;
+  box-shadow: 0 2px 8px rgba(236, 102, 8, 0.08);
+}
+
+.rode-draad p { margin: 0; }
+
+.rode-draad strong {
+  font-family: 'Raleway', sans-serif;
+  color: #EC6608;
+  font-weight: 700;
+  font-size: 8.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════════════════
+   NARRATIVE INTRO
+   ══════════════════════════════════════════════════ */
+.narrative {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-size: 10.5pt;
+  color: #888;
+  line-height: 1.65;
+  margin: -0.1cm 0 0.7cm 0;
+  padding: 0.3cm 0 0.3cm 0.6cm;
+  border-left: 2px solid #F0E8E0;
+}
+
+/* ══════════════════════════════════════════════════
+   VOLGENDE WEEK — Timeline with project badges
+   ══════════════════════════════════════════════════ */
+.next-week {
+  list-style: none;
+  padding: 0 0 0 4px;
+  margin: 0.4cm 0;
+}
+
+.next-week li {
+  position: relative;
+  padding: 12px 0 12px 32px;
+  border-left: 2px solid #F0E8E0;
+  margin: 0;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 10pt;
+  line-height: 1.6;
+  color: #444;
+}
+
+.next-week li:last-child { border-left-color: transparent; }
+
+.next-week li::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 16px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 3px solid #EC6608;
+  box-sizing: border-box;
+}
+
+/* Project tag badges with per-project colors */
+.next-week .project-tag {
+  font-family: 'Raleway', sans-serif;
+  font-size: 7.5pt;
+  font-weight: 700;
+  color: #FFFFFF;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-right: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: inline-block;
+  vertical-align: middle;
+  background: #EC6608;
+}
+
+/* Per-project badge colors */
+.project-tag.gg  { background: #2D8A4E; }
+.project-tag.uu  { background: #2D6B8A; }
+.project-tag.sdp { background: #7B4EA3; }
+.project-tag.sdh { background: #8A6B2D; }
+.project-tag.consulting-studio { background: #EC6608; }
+
+/* ══════════════════════════════════════════════════
+   FLOW CHAIN — Visual pipeline
+   ══════════════════════════════════════════════════ */
+.flow-chain {
+  margin: 0.6cm 0 0.8cm 0;
+  font-family: 'Raleway', sans-serif;
+  background: linear-gradient(135deg, #FEFCFA 0%, #FFF8F3 100%);
+  border: 1px solid #F0E8E0;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.flow-chain p,
+.flow-chain {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.flow-chain p { margin: 0; }
+
+.flow-step {
+  background: #FFFFFF;
+  border: 1px solid #E8E0D8;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 8.5pt;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.flow-step.highlight {
+  background: linear-gradient(135deg, #EC6608 0%, #D45A07 100%);
+  border-color: #D45A07;
+  color: #FFF;
+  box-shadow: 0 2px 8px rgba(236, 102, 8, 0.25);
+}
+
+.flow-arrow {
+  font-size: 16pt;
+  color: #DDD;
+  padding: 0 6px;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════
+   ACHIEVEMENT BADGE — Inline highlight pill
+   ══════════════════════════════════════════════════ */
+.badge {
+  font-family: 'Raleway', sans-serif;
+  font-size: 7.5pt;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+.badge.shipped  { color: #1B6E35; background: #E8F5E9; }
+.badge.validated { color: #2D6B8A; background: #E3F2FD; }
+.badge.new      { color: #B85C00; background: #FFF3E0; }
+.badge.live     { color: #1B6E35; background: #E8F5E9; }
+
+/* ══════════════════════════════════════════════════
+   SECTION CARDS (screen only) — White cards per section
+   ══════════════════════════════════════════════════ */
+.section-card {
+  background: #FFFFFF;
+  border: 1px solid #F0E8E0;
+  border-radius: 14px;
+  padding: 24px 28px 20px 28px;
+  margin: 0.4cm 0 0.8cm 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.section-card h3 {
+  margin-top: 0.4cm;
+}
+
+.section-card h3:first-child {
+  margin-top: 0;
+}
+
+/* ══════════════════════════════════════════════════
+   SCREEN — Centered, animated, interactive
+   ══════════════════════════════════════════════════ */
+@media screen {
+  body {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem 2rem;
+    background: #F7F5F2;
+  }
+
+  .cover-page {
+    height: auto;
+    min-height: 70vh;
+    margin: 0 -2rem;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 8px 32px rgba(236, 102, 8, 0.15);
+  }
+
+  .toc-page {
+    page-break-after: auto;
+    padding: 2.5rem 0;
+  }
+
+  h2 {
+    page-break-before: auto;
+    padding-top: 0.3cm;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  .toc a:hover { color: #EC6608; }
+
+  /* Metric cards: interactive hover */
+  .metric-card {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .metric-card:hover {
+    box-shadow: 0 8px 24px rgba(236, 102, 8, 0.15);
+    transform: translateY(-3px);
+  }
+
+  /* Flow chain hover on steps */
+  .flow-step {
+    transition: all 0.2s ease;
+  }
+
+  .flow-step:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .flow-step.highlight:hover {
+    box-shadow: 0 6px 16px rgba(236, 102, 8, 0.3);
+  }
+
+  /* Flow chain row gap for wrapping */
+  .flow-chain p,
+  .flow-chain {
+    row-gap: 10px;
+  }
+
+  /* Section cards */
+  .section-card {
+    transition: box-shadow 0.2s ease;
+  }
+
+  .section-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .scorecard { animation: fadeSlideUp 0.5s ease-out 0.1s both; }
+  .rode-draad { animation: fadeSlideUp 0.5s ease-out 0.2s both; }
+  .flow-chain { animation: fadeSlideUp 0.5s ease-out 0.3s both; }
+  .section-card { animation: fadeSlideUp 0.4s ease-out both; }
+
+  /* Next-week timeline dot pulse on hover */
+  .next-week li:hover::before {
+    background: #EC6608;
+    box-shadow: 0 0 0 4px rgba(236, 102, 8, 0.15);
+  }
+}
+
+/* ── Print ── */
+@media print {
+  body { font-size: 10.5pt; }
+  h1 { margin-top: 0; }
+  h2, h3, h4 { page-break-after: avoid; }
+  table { page-break-inside: avoid; }
+  p, li { orphans: 3; widows: 3; }
+
+  .scorecard { grid-template-columns: repeat(2, 1fr); }
+  .metric-card .metric-value { font-size: 22pt; }
+  .metric-card::after { display: none; }
+
+  /* No animations, shadows, or hover in print */
+  .section-card { box-shadow: none; border: 1px solid #EEE; }
+}
+
+
+:root{color-scheme:light dark}body{margin:0;background:#f6f4ef;color:#171717;font:16px/1.55 Inter,ui-sans-serif,system-ui,sans-serif}.public-demo{max-width:1100px;margin:0 auto;padding:48px 24px}.demo-hero{min-height:420px;border-radius:32px;margin-bottom:28px;padding:52px;background:linear-gradient(135deg,rgba(0,0,0,.08),rgba(255,255,255,.55));display:flex;align-items:center}.eyebrow{letter-spacing:.15em;text-transform:uppercase;font-size:.78rem;font-weight:800;opacity:.72}.cover-title{font-size:clamp(2.4rem,7vw,5.8rem);line-height:.9;margin:.2em 0;letter-spacing:-.06em}.cover-subtitle{max-width:680px;font-size:1.15rem}.demo-section{background:rgba(255,255,255,.72);border:1px solid rgba(0,0,0,.1);border-radius:24px;padding:28px;margin:18px 0;box-shadow:0 20px 60px rgba(0,0,0,.08)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.card{border:1px solid rgba(0,0,0,.12);border-radius:18px;padding:18px;background:rgba(255,255,255,.6)}.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid rgba(0,0,0,.12);text-align:left}@media(max-width:760px){.split{grid-template-columns:1fr}.demo-hero{padding:28px}}
+
+</style>
+</head>
+<body>
+
+<main class="public-demo">
+  <section class="cover-page demo-hero">
+    <div class="cover-content">
+      <p class="eyebrow">ANONYMIZED BRAND HTML TEMPLATE</p>
+      <h1 class="cover-title">Proof-first project brief</h1>
+      <p class="cover-subtitle">A rendered, public-safe sample of a local style system. Names, logos, private paths, and source context have been removed.</p>
+      <p class="cover-author">viggomeesters-assets · design reference</p>
+      <p class="cover-date">2026</p>
+    </div>
+  </section>
+  <section class="demo-section">
+    <h2>Executive signal</h2>
+    <p>This page exists so repo browsing shows a rendered design instead of a Pandoc template with unresolved variables.</p>
+    <div class="cards">
+      <article class="card"><h3>Clarity</h3><p>Strong hierarchy, readable labels, and enough whitespace for fast scanning.</p></article>
+      <article class="card"><h3>Evidence</h3><p>Cards, tables, and callouts create a proof-first narrative.</p></article>
+      <article class="card"><h3>Reuse</h3><p>Use as visual inspiration only. Canonical public style remains viggomeesters.com.</p></article>
+    </div>
+  </section>
+  <section class="demo-section split">
+    <div><h2>System map</h2><p>Input → source-backed index → prompt contract → rendered asset.</p></div>
+    <table><thead><tr><th>Layer</th><th>Role</th></tr></thead><tbody><tr><td>Style</td><td>Palette and typography cues</td></tr><tr><td>Layout</td><td>Cards, cover, report structure</td></tr><tr><td>Safety</td><td>Anonymized public copy</td></tr></tbody></table>
+  </section>
+</main>
+
+</body>
+</html>

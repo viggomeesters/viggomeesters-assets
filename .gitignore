@@ -1,0 +1,17 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local/generated scratch
+.tmp/
+tmp/
+.cache/
+
+# Secrets never belong in this public repo
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx

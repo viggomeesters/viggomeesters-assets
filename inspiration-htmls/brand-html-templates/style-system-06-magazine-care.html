@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magazine-like editorial system</title>
+<style>
+/* Public-safe rendered sample generated from anonymized local style source. */
+/* Care Studio — Magazine Stylesheet v1
+   Brand: #503F7C (Paars), #DE3752 (Rood), Anton (titles), Poppins (body)
+   Pipeline: pandoc (fenced divs) → HTML → Chrome headless → PDF
+   Designed for: single-page A4 layout with rich magazine components
+
+   Fenced div classes:
+   .hero          Full-bleed image page
+   .splash        Full-color background page (chapter opener)
+   .splash.purple / .splash.red  Color variants
+   .columns       Two-column text layout
+   .columns-3     Three-column text layout
+   .stat-grid     Grid of stat cards
+   .stat          Single stat card (number + label)
+   .pullquote     Large decorative quote
+   .sidebar       Colored sidebar/callout box
+   .image-text    Image + text side by side
+   .image-text.reverse  Text + image (flipped)
+   .full-image    Full-width image with caption
+   .key-points    Key takeaways box
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* Local font fallback for offline exports */
+/* ══════════════════════════════════════════════════
+   PAGE SETUP — Single page A4
+   ══════════════════════════════════════════════════ */
+
+@page {
+  size: A4;
+  margin: 2cm 2.2cm 2.4cm 2.2cm;
+}
+
+/* Page number — bottom outside */
+@page {
+  @bottom-center {
+    content: counter(page);
+    font-family: 'Poppins', sans-serif;
+    font-size: 7.5pt;
+    color: #999;
+  }
+}
+
+/* Cover: no margins, no page number */
+@page :first {
+  margin: 0;
+  @bottom-center { content: none; }
+}
+
+/* ══════════════════════════════════════════════════
+   COVER PAGE
+   ══════════════════════════════════════════════════ */
+
+.cover-page {
+  position: relative;
+  background: #503F7C;
+  /* Negative margins break out of @page margins for full-bleed */
+  margin: -2cm -2.2cm 0 -2.2cm;
+  padding: 0;
+  width: calc(210mm);
+  min-height: calc(297mm);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  overflow: hidden;
+}
+
+/* Cover background image */
+.cover-page .cover-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+}
+
+/* Red accent stripe */
+.cover-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10mm;
+  height: 100%;
+  background: #DE3752;
+  z-index: 2;
+}
+
+/* Bottom purple gradient bar */
+.cover-page::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  background: linear-gradient(to top, rgba(80,63,124,0.95), rgba(80,63,124,0));
+  z-index: 1;
+}
+
+.cover-content {
+  position: relative;
+  z-index: 3;
+  padding: 4.5cm 3cm 0 3cm;
+  flex: 1;
+}
+
+.cover-page .cover-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 44pt;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0;
+  border-bottom: none;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.cover-page .cover-title::after { display: none; }
+
+.cover-page .cover-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14pt;
+  font-weight: 400;
+  color: rgba(255,255,255,0.85);
+  margin: 0.8cm 0 0 0;
+  line-height: 1.5;
+}
+
+.cover-page .cover-author {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11pt;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  margin: 2cm 0 0 0;
+}
+
+.cover-page .cover-date {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10pt;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  margin: 0.3cm 0 0 0;
+}
+
+.cover-logo {
+  position: relative;
+  z-index: 3;
+  padding: 0 3cm 2.5cm 3cm;
+  margin-top: auto;
+}
+
+.cover-logo-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 32pt;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cover-logo-text .care { color: #DE3752; filter: brightness(1.3); }
+.cover-logo-text .studio { color: #FFFFFF; }
+
+/* ══════════════════════════════════════════════════
+   TABLE OF CONTENTS
+   ══════════════════════════════════════════════════ */
+
+.toc-page {
+  page-break-after: always;
+  padding-top: 1.5cm;
+}
+
+.toc-heading {
+  font-family: 'Anton', sans-serif;
+  font-size: 24pt;
+  font-weight: 400;
+  color: #503F7C;
+  margin: 0 0 1.2cm 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  page-break-before: avoid;
+}
+
+.toc-heading::after {
+  content: '';
+  display: block;
+  width: 4cm;
+  height: 4px;
+  background: #DE3752;
+  margin-top: 0.5cm;
+  border-radius: 2px;
+}
+
+.toc ul { list-style: none; padding: 0; margin: 0; }
+
+.toc > ul > li {
+  margin: 0;
+  border-bottom: 1px solid #F0EDF6;
+}
+
+.toc > ul > li > a {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11pt;
+  font-weight: 600;
+  color: #1A1A1A;
+  text-decoration: none;
+  display: block;
+  padding: 0.4cm 0;
+}
+
+.toc > ul > li > ul {
+  list-style: none;
+  padding: 0 0 0.3cm 1cm;
+  margin: 0;
+  border-left: 2px solid #503F7C;
+}
+
+.toc > ul > li > ul > li > a {
+  font-family: 'Poppins', sans-serif;
+  font-size: 9.5pt;
+  font-weight: 400;
+  color: #6B7280;
+  text-decoration: none;
+  display: block;
+  padding: 0.12cm 0;
+}
+
+.toc > ul > li > ul > li > ul { display: none; }
+
+/* ══════════════════════════════════════════════════
+   PAGE FOOTER
+   ══════════════════════════════════════════════════ */
+
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.footer-logo-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10pt;
+  font-weight: 700;
+  opacity: 0.15;
+}
+
+.footer-logo-text .care { color: #DE3752; }
+.footer-logo-text .studio { color: #503F7C; }
+
+/* ══════════════════════════════════════════════════
+   BASE TYPOGRAPHY
+   ══════════════════════════════════════════════════ */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10pt;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #374151;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── H1 ── */
+h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: 28pt;
+  font-weight: 400;
+  color: #503F7C;
+  margin: 0 0 0.3cm 0;
+  padding: 0.8cm 0 0.5cm 0;
+  border-bottom: none;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 4cm;
+  height: 4px;
+  background: #DE3752;
+  margin-top: 0.4cm;
+  border-radius: 2px;
+}
+
+/* ── H2 — Chapter opener, new page ── */
+h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 20pt;
+  font-weight: 400;
+  color: #503F7C;
+  margin: 0 0 0.6cm 0;
+  padding: 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  page-break-before: always;
+  page-break-after: avoid;
+  line-height: 1.15;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 3cm;
+  height: 3px;
+  background: #DE3752;
+  margin-top: 0.3cm;
+  border-radius: 2px;
+}
+
+body > h2:first-of-type { page-break-before: avoid; }
+
+/* ── H3 ── */
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12pt;
+  font-weight: 700;
+  color: #111827;
+  margin: 0.9cm 0 0.35cm 0;
+  padding: 0.15cm 0 0.15cm 0.55cm;
+  border-left: 4px solid #503F7C;
+  page-break-after: avoid;
+}
+
+/* ── H4 ── */
+h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: #374151;
+  margin: 0.6cm 0 0.2cm 0;
+  page-break-after: avoid;
+}
+
+/* ── Paragraphs ── */
+p {
+  margin: 0 0 0.4cm 0;
+}
+
+/* Lead paragraph (first p after h2) */
+h2 + p {
+  font-size: 11pt;
+  font-weight: 400;
+  color: #555;
+  line-height: 1.6;
+}
+
+strong { color: #111827; font-weight: 600; }
+
+/* ══════════════════════════════════════════════════
+   TABLES — Magazine style
+   ══════════════════════════════════════════════════ */
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  margin: 0.5cm 0 0.8cm 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.5;
+  page-break-inside: avoid;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(80,63,124,0.08);
+}
+
+thead th {
+  background: #503F7C;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 8pt;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+}
+
+tbody td {
+  padding: 9px 14px;
+  border-bottom: 1px solid #E5E7EB;
+  vertical-align: top;
+  color: #374151;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: #F0EDF6; }
+tbody tr:nth-child(odd) { background: #FFFFFF; }
+tbody td strong { color: #111827; font-weight: 600; }
+
+/* ══════════════════════════════════════════════════
+   LISTS
+   ══════════════════════════════════════════════════ */
+
+ul, ol {
+  margin: 0.25cm 0 0.5cm 0;
+  padding-left: 0.9cm;
+}
+
+li {
+  margin-bottom: 0.15cm;
+  line-height: 1.65;
+}
+
+li strong { color: #111827; font-weight: 600; }
+li > ul, li > ol { margin: 0.1cm 0 0.15cm 0; }
+
+/* ══════════════════════════════════════════════════
+   BLOCKQUOTES
+   ══════════════════════════════════════════════════ */
+
+blockquote {
+  border-left: 4px solid #DE3752;
+  margin: 0.6cm 0;
+  padding: 0.4cm 0.8cm;
+  background: #FDF0F2;
+  color: #555;
+  font-size: 9.5pt;
+  border-radius: 0 8px 8px 0;
+}
+
+blockquote p:last-child { margin-bottom: 0; }
+
+/* ══════════════════════════════════════════════════
+   HR
+   ══════════════════════════════════════════════════ */
+
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, #503F7C, #503F7C 30%, transparent);
+  margin: 1cm 0;
+  opacity: 0.2;
+}
+
+/* ══════════════════════════════════════════════════
+   LINKS & CODE
+   ══════════════════════════════════════════════════ */
+
+a { color: #DE3752; text-decoration: none; }
+
+code {
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  font-size: 8pt;
+  background: #F0EDF6;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #503F7C;
+}
+
+pre {
+  background: #F0EDF6;
+  padding: 0.5cm;
+  border-left: 4px solid #503F7C;
+  border-radius: 0 8px 8px 0;
+  font-size: 8pt;
+  line-height: 1.4;
+  margin: 0.4cm 0;
+}
+
+pre code { background: none; }
+
+/* ══════════════════════════════════════════════════
+   MAGAZINE COMPONENTS — Fenced Divs
+   ══════════════════════════════════════════════════ */
+
+/* ── .splash — Full-bleed chapter opener ── */
+.splash {
+  background: #503F7C;
+  color: #FFFFFF;
+  margin: -2cm -2.2cm 0 -2.2cm;
+  padding: 4cm 3cm 3cm 3cm;
+  page-break-before: always;
+  page-break-after: always;
+  page-break-inside: avoid;
+  min-height: 250mm;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+
+.splash::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10mm;
+  height: 100%;
+  background: #DE3752;
+}
+
+.splash.red {
+  background: #DE3752;
+}
+
+.splash.red::before {
+  background: #503F7C;
+}
+
+.splash h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 36pt;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.08;
+  margin: 0 0 0.5cm 0;
+  padding: 0;
+  page-break-before: avoid;
+}
+
+.splash h2::after {
+  background: #DE3752;
+  width: 4cm;
+  height: 4px;
+}
+
+.splash.red h2::after {
+  background: #FFFFFF;
+}
+
+.splash h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13pt;
+  font-weight: 400;
+  color: rgba(255,255,255,0.8);
+  border-left: none;
+  padding: 0;
+  margin: 0;
+}
+
+.splash p {
+  color: rgba(255,255,255,0.75);
+  font-size: 11pt;
+  line-height: 1.6;
+  max-width: 70%;
+}
+
+/* Splash with background image */
+.splash .splash-img {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+}
+
+/* ── .hero — Full-bleed image page ── */
+.hero {
+  margin: -2cm -2.2cm 0 -2.2cm;
+  padding: 0;
+  page-break-before: always;
+  page-break-after: always;
+  page-break-inside: avoid;
+  position: relative;
+  min-height: 280mm;
+  overflow: hidden;
+}
+
+.hero img {
+  width: 100%;
+  height: 297mm;
+  object-fit: cover;
+  display: block;
+}
+
+.hero .hero-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2cm 3cm 1.5cm 3cm;
+  background: linear-gradient(to top, rgba(80,63,124,0.9), transparent);
+  color: #FFFFFF;
+}
+
+.hero .hero-caption h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 28pt;
+  color: #FFFFFF;
+  page-break-before: avoid;
+  margin: 0 0 0.3cm 0;
+}
+
+.hero .hero-caption h2::after {
+  background: #DE3752;
+}
+
+.hero .hero-caption p {
+  color: rgba(255,255,255,0.85);
+  font-size: 10pt;
+}
+
+/* ── .columns — Multi-column text ── */
+.columns {
+  column-count: 2;
+  column-gap: 1.2cm;
+  column-rule: 1px solid #E5E7EB;
+  margin: 0.5cm 0;
+}
+
+.columns-3 {
+  column-count: 3;
+  column-gap: 0.8cm;
+  column-rule: 1px solid #E5E7EB;
+  margin: 0.5cm 0;
+}
+
+.columns h3, .columns-3 h3 {
+  column-span: all;
+}
+
+.columns p, .columns-3 p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* ── .stat-grid — Infographic stat cards ── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6cm;
+  margin: 0.8cm 0 1cm 0;
+  page-break-inside: avoid;
+}
+
+.stat {
+  background: #F0EDF6;
+  border-radius: 12px;
+  padding: 0.7cm 0.6cm;
+  text-align: center;
+  page-break-inside: avoid;
+  border-bottom: 4px solid #503F7C;
+}
+
+.stat strong, .stat .number {
+  font-family: 'Anton', sans-serif;
+  font-size: 28pt;
+  font-weight: 400;
+  color: #503F7C;
+  display: block;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.stat em, .stat .label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 8.5pt;
+  font-weight: 500;
+  color: #6B7280;
+  display: block;
+  margin-top: 0.15cm;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Red accent variant */
+.stat.red {
+  border-bottom-color: #DE3752;
+}
+
+.stat.red strong, .stat.red .number {
+  color: #DE3752;
+}
+
+/* ── .pullquote — Large decorative quote ── */
+.pullquote {
+  margin: 1.2cm 1cm;
+  padding: 0.8cm 1.2cm;
+  position: relative;
+  page-break-inside: avoid;
+}
+
+.pullquote::before {
+  content: '\201C';
+  font-family: 'Anton', sans-serif;
+  font-size: 72pt;
+  color: #DE3752;
+  opacity: 0.25;
+  position: absolute;
+  top: -0.5cm;
+  left: -0.2cm;
+  line-height: 1;
+}
+
+.pullquote p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14pt;
+  font-weight: 400;
+  font-style: italic;
+  color: #503F7C;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.pullquote .attribution, .pullquote em:last-child {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 9pt;
+  font-weight: 600;
+  font-style: normal;
+  color: #DE3752;
+  margin-top: 0.4cm;
+  letter-spacing: 0.02em;
+}
+
+/* ── .sidebar — Colored callout box ── */
+.sidebar {
+  background: #F0EDF6;
+  border-left: 5px solid #503F7C;
+  border-radius: 0 10px 10px 0;
+  padding: 0.6cm 0.8cm;
+  margin: 0.6cm 0;
+  page-break-inside: avoid;
+}
+
+.sidebar.red {
+  background: #FDF0F2;
+  border-left-color: #DE3752;
+}
+
+.sidebar h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10pt;
+  font-weight: 700;
+  color: #503F7C;
+  margin: 0 0 0.2cm 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sidebar.red h4 { color: #DE3752; }
+
+/* ── .image-text — Side by side layout ── */
+.image-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1cm;
+  margin: 0.6cm 0;
+  align-items: start;
+  page-break-inside: avoid;
+}
+
+.image-text.reverse {
+  direction: rtl;
+}
+
+.image-text.reverse > * {
+  direction: ltr;
+}
+
+.image-text img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 12px rgba(80,63,124,0.12);
+}
+
+.image-text .text-content {
+  padding: 0.3cm 0;
+}
+
+/* ── .full-image — Full-width image ── */
+.full-image {
+  margin: 0.8cm 0;
+  page-break-inside: avoid;
+}
+
+.full-image img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(80,63,124,0.1);
+}
+
+.full-image .caption {
+  font-family: 'Poppins', sans-serif;
+  font-size: 8.5pt;
+  font-weight: 400;
+  color: #6B7280;
+  text-align: center;
+  margin-top: 0.3cm;
+  font-style: italic;
+}
+
+/* ── .key-points — Takeaways box ── */
+.key-points {
+  background: linear-gradient(135deg, #503F7C 0%, #6B5A9E 100%);
+  color: #FFFFFF;
+  border-radius: 12px;
+  padding: 0.8cm 1cm;
+  margin: 0.8cm 0;
+  page-break-inside: avoid;
+}
+
+.key-points h3, .key-points h4 {
+  font-family: 'Anton', sans-serif;
+  font-size: 14pt;
+  color: #FFFFFF;
+  border-left: none;
+  padding: 0;
+  margin: 0 0 0.4cm 0;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.key-points ul { padding-left: 0.7cm; }
+
+.key-points li {
+  color: rgba(255,255,255,0.9);
+  font-size: 9.5pt;
+  margin-bottom: 0.2cm;
+}
+
+.key-points li strong { color: #FFFFFF; }
+
+/* ── .icon-grid — Feature grid with emoji icons ── */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5cm;
+  margin: 0.6cm 0;
+}
+
+.icon-grid .item {
+  display: flex;
+  gap: 0.4cm;
+  align-items: flex-start;
+  padding: 0.4cm;
+  background: #FAFAFB;
+  border-radius: 8px;
+}
+
+.icon-grid .item .icon {
+  font-size: 20pt;
+  flex-shrink: 0;
+}
+
+/* ── .timeline — Visual timeline ── */
+.timeline {
+  border-left: 3px solid #503F7C;
+  margin: 0.6cm 0 0.8cm 0.5cm;
+  padding-left: 1cm;
+}
+
+.timeline h4 {
+  position: relative;
+  margin: 0.5cm 0 0.15cm 0;
+}
+
+.timeline h4::before {
+  content: '';
+  position: absolute;
+  left: -1.35cm;
+  top: 0.15cm;
+  width: 10px;
+  height: 10px;
+  background: #DE3752;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 0 2px #503F7C;
+}
+
+/* ══════════════════════════════════════════════════
+   IMAGES — Inline images from markdown
+   ══════════════════════════════════════════════════ */
+
+figure {
+  margin: 0.8cm 0;
+  page-break-inside: avoid;
+}
+
+figure img {
+  width: 100%;
+  max-height: 200mm;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(80,63,124,0.1);
+  display: block;
+}
+
+figure figcaption, figure .caption {
+  font-family: 'Poppins', sans-serif;
+  font-size: 8.5pt;
+  font-weight: 400;
+  color: #6B7280;
+  text-align: center;
+  margin-top: 0.3cm;
+  font-style: italic;
+}
+
+/* Standalone img (not in figure) */
+img:not(.cover-bg *) {
+  max-width: 100%;
+  max-height: 200mm;
+  object-fit: contain;
+}
+
+/* ══════════════════════════════════════════════════
+   PRINT MEDIA
+   ══════════════════════════════════════════════════ */
+
+@media print {
+  body { font-size: 10pt; }
+  h1 { margin-top: 0; }
+  h2, h3, h4 { page-break-after: avoid; }
+  table, .stat-grid, .key-points { page-break-inside: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  .splash, .hero { page-break-inside: avoid; }
+}
+
+
+:root{color-scheme:light dark}body{margin:0;background:#f6f4ef;color:#171717;font:16px/1.55 Inter,ui-sans-serif,system-ui,sans-serif}.public-demo{max-width:1100px;margin:0 auto;padding:48px 24px}.demo-hero{min-height:420px;border-radius:32px;margin-bottom:28px;padding:52px;background:linear-gradient(135deg,rgba(0,0,0,.08),rgba(255,255,255,.55));display:flex;align-items:center}.eyebrow{letter-spacing:.15em;text-transform:uppercase;font-size:.78rem;font-weight:800;opacity:.72}.cover-title{font-size:clamp(2.4rem,7vw,5.8rem);line-height:.9;margin:.2em 0;letter-spacing:-.06em}.cover-subtitle{max-width:680px;font-size:1.15rem}.demo-section{background:rgba(255,255,255,.72);border:1px solid rgba(0,0,0,.1);border-radius:24px;padding:28px;margin:18px 0;box-shadow:0 20px 60px rgba(0,0,0,.08)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.card{border:1px solid rgba(0,0,0,.12);border-radius:18px;padding:18px;background:rgba(255,255,255,.6)}.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid rgba(0,0,0,.12);text-align:left}@media(max-width:760px){.split{grid-template-columns:1fr}.demo-hero{padding:28px}}
+
+</style>
+</head>
+<body>
+
+<main class="public-demo">
+  <section class="cover-page demo-hero">
+    <div class="cover-content">
+      <p class="eyebrow">ANONYMIZED BRAND HTML TEMPLATE</p>
+      <h1 class="cover-title">Proof-first project brief</h1>
+      <p class="cover-subtitle">A rendered, public-safe sample of a local style system. Names, logos, private paths, and source context have been removed.</p>
+      <p class="cover-author">viggomeesters-assets · design reference</p>
+      <p class="cover-date">2026</p>
+    </div>
+  </section>
+  <section class="demo-section">
+    <h2>Executive signal</h2>
+    <p>This page exists so repo browsing shows a rendered design instead of a Pandoc template with unresolved variables.</p>
+    <div class="cards">
+      <article class="card"><h3>Clarity</h3><p>Strong hierarchy, readable labels, and enough whitespace for fast scanning.</p></article>
+      <article class="card"><h3>Evidence</h3><p>Cards, tables, and callouts create a proof-first narrative.</p></article>
+      <article class="card"><h3>Reuse</h3><p>Use as visual inspiration only. Canonical public style remains viggomeesters.com.</p></article>
+    </div>
+  </section>
+  <section class="demo-section split">
+    <div><h2>System map</h2><p>Input → source-backed index → prompt contract → rendered asset.</p></div>
+    <table><thead><tr><th>Layer</th><th>Role</th></tr></thead><tbody><tr><td>Style</td><td>Palette and typography cues</td></tr><tr><td>Layout</td><td>Cards, cover, report structure</td></tr><tr><td>Safety</td><td>Anonymized public copy</td></tr></tbody></table>
+  </section>
+</main>
+
+</body>
+</html>

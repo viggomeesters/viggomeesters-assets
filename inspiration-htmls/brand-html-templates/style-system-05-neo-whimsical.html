@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neo-whimsical portfolio system</title>
+<style>
+/* Public-safe rendered sample generated from anonymized local style source. */
+/* Neo-Whimsical — Personal Style v1
+   WARM PEACH — Inspired by Duck English, Radical Imagination Lab, FOAM
+   Color theory: warm crème canvas, peach/tangerine accents
+   Fraunces display · DM Sans body
+   Pipeline: pandoc → HTML → Chrome headless → PDF
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+
+@page {
+	size: A4;
+	margin: 2.4cm 2.2cm 2.6cm 2.2cm;
+}
+
+@page {
+	@bottom-center {
+		content: counter(page);
+		font-family: "Fraunces", serif;
+		font-size: 9pt;
+		font-weight: 800;
+		color: #ff8c42;
+	}
+}
+
+@page :first {
+	margin: 0;
+	@bottom-center {
+		content: none;
+	}
+}
+
+/* ══════════════════════════════════════════════════
+   COVER PAGE — Warm organic shapes
+   ══════════════════════════════════════════════════ */
+.cover-page {
+	position: relative;
+	background: #fff5ec;
+	margin: 0;
+	padding: 6cm 3cm 3cm 3.5cm;
+	height: 297mm;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	page-break-after: always;
+	overflow: hidden;
+}
+
+/* Large peach blob — top-right */
+.cover-page::before {
+	content: "";
+	position: absolute;
+	top: -4cm;
+	right: -4cm;
+	width: 18cm;
+	height: 18cm;
+	background: #ffaa80;
+	border-radius: 50% 40% 60% 30% / 40% 50% 30% 60%;
+	opacity: 0.2;
+}
+
+/* Tangerine blob — bottom-left */
+.cover-page::after {
+	content: "";
+	position: absolute;
+	bottom: -3cm;
+	left: -3cm;
+	width: 14cm;
+	height: 14cm;
+	background: #ff8c42;
+	border-radius: 40% 60% 30% 50% / 50% 30% 60% 40%;
+	opacity: 0.15;
+}
+
+.cover-page .cover-title {
+	font-family: "Fraunces", serif;
+	font-size: 42pt;
+	font-weight: 900;
+	color: #2a1810;
+	margin: 0;
+	padding: 0;
+	line-height: 1.05;
+	letter-spacing: -0.03em;
+	border-bottom: none;
+	position: relative;
+	z-index: 1;
+}
+
+.cover-page .cover-title::after {
+	display: none;
+}
+
+.cover-page .cover-subtitle {
+	font-family: "DM Sans", sans-serif;
+	font-size: 13pt;
+	font-weight: 500;
+	color: #6b5648;
+	margin: 0.5cm 0 0 0;
+	line-height: 1.5;
+	position: relative;
+	z-index: 1;
+}
+
+.cover-page .cover-author {
+	font-family: "Fraunces", serif;
+	font-size: 12pt;
+	font-weight: 800;
+	color: #ff8c42;
+	margin: auto 0 0 0;
+	position: relative;
+	z-index: 1;
+	letter-spacing: 0.02em;
+}
+
+.cover-page .cover-date {
+	font-family: "DM Sans", sans-serif;
+	font-size: 9pt;
+	font-weight: 700;
+	color: #ffaa80;
+	margin: 0.15cm 0 0 0;
+	position: relative;
+	z-index: 1;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.cover-logo {
+	display: none;
+}
+
+/* ══════════════════════════════════════════════════
+   TABLE OF CONTENTS
+   ══════════════════════════════════════════════════ */
+.toc-page {
+	page-break-after: always;
+	padding-top: 1cm;
+}
+
+.toc-heading {
+	font-family: "Fraunces", serif;
+	font-size: 24pt;
+	font-weight: 900;
+	color: #2a1810;
+	background: none;
+	border-radius: 0;
+	margin: 0 0 0.8cm 0;
+	padding: 0;
+	page-break-before: avoid;
+	letter-spacing: -0.02em;
+}
+
+.toc-page .toc-heading {
+	page-break-before: avoid;
+}
+
+.toc-heading::after {
+	display: none;
+}
+
+.toc ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.toc > ul > li {
+	margin: 0;
+	padding: 0;
+	border-bottom: 2px solid #ffe8d6;
+}
+
+.toc > ul > li > a {
+	font-family: "Fraunces", serif;
+	font-size: 11pt;
+	font-weight: 700;
+	color: #2a1810;
+	text-decoration: none;
+	display: block;
+	padding: 0.35cm 0;
+}
+
+.toc > ul > li > ul {
+	list-style: none;
+	padding: 0 0 0.2cm 0.8cm;
+	margin: 0;
+	border-left: 3px solid #ffd4a8;
+}
+
+.toc > ul > li > ul > li > a {
+	font-family: "DM Sans", sans-serif;
+	font-size: 9.5pt;
+	font-weight: 600;
+	color: #6b5648;
+	text-decoration: none;
+	display: block;
+	padding: 0.12cm 0;
+}
+
+.toc > ul > li > ul > li > ul {
+	display: none;
+}
+
+/* ══════════════════════════════════════════════════
+   FOOTER — Hidden
+   ══════════════════════════════════════════════════ */
+.page-footer {
+	display: none;
+}
+
+/* ══════════════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════════════ */
+body {
+	font-family: "DM Sans", -apple-system, sans-serif;
+	font-size: 10.5pt;
+	line-height: 1.72;
+	color: #2a1810;
+	margin: 0;
+	padding: 0;
+}
+
+/* ── H1 ── */
+h1 {
+	font-family: "Fraunces", serif;
+	font-size: 30pt;
+	font-weight: 900;
+	color: #2a1810;
+	margin: 0 0 0.2cm 0;
+	padding: 0.6cm 0 0.4cm 0;
+	border-bottom: none;
+	letter-spacing: -0.03em;
+	line-height: 1.1;
+}
+
+h1::after {
+	content: "";
+	display: block;
+	width: 3.5cm;
+	height: 5px;
+	background: linear-gradient(to right, #ff8c42, #ffaa80);
+	margin-top: 0.3cm;
+	border-radius: 50px;
+}
+
+h1 + p {
+	font-family: "DM Sans", sans-serif;
+	font-size: 10.5pt;
+	color: #6b5648;
+	margin-bottom: 0.8cm;
+	line-height: 1.6;
+	font-weight: 500;
+}
+
+/* ── H2 — Tangerine pill, page break ── */
+h2 {
+	font-family: "Fraunces", serif;
+	font-size: 15pt;
+	font-weight: 800;
+	color: #ffffff;
+	background: #ff8c42;
+	margin: 1.2cm 0 0.6cm 0;
+	padding: 0.35cm 1cm;
+	letter-spacing: -0.01em;
+	display: block;
+	border-radius: 50px;
+	page-break-before: always;
+	page-break-after: avoid;
+}
+
+body > h2:first-of-type {
+	page-break-before: avoid;
+}
+
+/* ── H3 — Peach pill, smaller ── */
+h3 {
+	font-family: "Fraunces", serif;
+	font-size: 11pt;
+	font-weight: 700;
+	color: #2a1810;
+	background: #ffd4a8;
+	margin: 0.7cm 0 0.25cm 0;
+	padding: 0.22cm 0.8cm;
+	display: inline-block;
+	border-radius: 50px;
+	page-break-after: avoid;
+}
+
+h4 {
+	font-family: "Fraunces", serif;
+	font-size: 10.5pt;
+	font-weight: 700;
+	color: #ff8c42;
+	background: #fff5ec;
+	margin: 0.5cm 0 0.15cm 0;
+	padding: 0.15cm 0.7cm;
+	display: inline-block;
+	border-radius: 50px;
+}
+
+/* ── Paragraphs ── */
+p {
+	margin: 0 0 0.32cm 0;
+}
+
+/* ── Tables — warm header, peach rows, rounded ── */
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+	width: 100%;
+	margin: 0.5cm 0 0.7cm 0;
+	font-family: "DM Sans", sans-serif;
+	font-size: 9pt;
+	font-weight: 400;
+	line-height: 1.55;
+	page-break-inside: avoid;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 2px 10px rgba(42, 24, 16, 0.06);
+}
+
+thead th {
+	background: #ff8c42;
+	color: #ffffff;
+	font-family: "Fraunces", serif;
+	font-weight: 800;
+	padding: 10px 14px;
+	text-align: left;
+	font-size: 8.5pt;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	border: none;
+}
+
+tbody td {
+	padding: 10px 14px;
+	border-bottom: 2px solid #ffe8d6;
+	vertical-align: top;
+	color: #2a1810;
+}
+
+tbody tr:last-child td {
+	border-bottom: none;
+}
+tbody tr:nth-child(even) {
+	background: #fff5ec;
+}
+tbody tr:nth-child(odd) {
+	background: #fffbf7;
+}
+tbody td strong {
+	color: #2a1810;
+	font-weight: 700;
+}
+
+/* First column — bold labels */
+tbody td:first-child {
+	font-family: "Fraunces", serif;
+	font-weight: 700;
+	color: #2a1810;
+	font-size: 9pt;
+}
+
+/* ── Lists ── */
+ul,
+ol {
+	margin: 0.2cm 0 0.4cm 0;
+	padding-left: 0.85cm;
+}
+
+ul li {
+	margin-bottom: 0.12cm;
+	line-height: 1.68;
+}
+
+ul li::marker {
+	color: #ff8c42;
+	font-weight: 800;
+}
+
+ol li::marker {
+	color: #ffaa80;
+	font-weight: 800;
+	font-family: "Fraunces", serif;
+}
+
+li strong {
+	font-family: "Fraunces", serif;
+	color: #2a1810;
+	font-weight: 700;
+}
+
+li > ul,
+li > ol {
+	margin: 0.08cm 0 0.12cm 0;
+}
+
+/* ── HR — warm gradient ── */
+hr {
+	border: none;
+	height: 4px;
+	background: linear-gradient(to right, #ff8c42 0%, #ffaa80 50%, #ffd4a8 100%);
+	margin: 1cm 0;
+	border-radius: 50px;
+}
+
+/* ── Links ── */
+a {
+	color: #ff8c42;
+	text-decoration: none;
+	font-weight: 700;
+}
+
+/* ── Code ── */
+code {
+	font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+	font-size: 8.5pt;
+	background: #fff5ec;
+	padding: 2px 6px;
+	border-radius: 50px;
+	color: #ff8c42;
+}
+
+pre {
+	background: #fffbf7;
+	padding: 0.4cm 0.7cm;
+	border-left: 5px solid #ffd4a8;
+	border-radius: 0 20px 20px 0;
+	font-size: 8.5pt;
+	line-height: 1.4;
+	margin: 0.3cm 0;
+}
+
+pre code {
+	background: none;
+	border-radius: 0;
+}
+
+/* ── Blockquotes — warm apricot card ── */
+blockquote {
+	border: none;
+	margin: 0.5cm 0;
+	padding: 0.5cm 1cm;
+	background: #fff5ec;
+	color: #6b5648;
+	font-size: 10.5pt;
+	border-radius: 20px;
+	border-left: 5px solid #ffaa80;
+	font-style: italic;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* ── Strong ── */
+strong {
+	color: #2a1810;
+	font-weight: 700;
+}
+
+/* ── Highlight marker effect ── */
+.highlight-marker {
+	background: linear-gradient(transparent 60%, #ffd4a8 60%);
+	padding: 0 4px;
+}
+
+/* ══════════════════════════════════════════════════
+   SCREEN
+   ══════════════════════════════════════════════════ */
+@media screen {
+	body {
+		max-width: 820px;
+		margin: 0 auto;
+		padding: 0 2rem 4rem 2rem;
+		background: #fff5ec;
+	}
+
+	.cover-page {
+		height: auto;
+		min-height: 70vh;
+		margin: 0 -2rem;
+		border-radius: 0 0 24px 24px;
+		box-shadow: 0 8px 32px rgba(255, 140, 66, 0.12);
+	}
+
+	.toc-page {
+		page-break-after: auto;
+		padding: 2.5rem 0;
+	}
+
+	h2 {
+		page-break-before: auto;
+		padding-top: 0.3cm;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	.toc a {
+		transition: color 0.2s ease;
+	}
+	.toc a:hover {
+		color: #ff8c42;
+	}
+}
+
+/* ══════════════════════════════════════════════════
+   PRINT
+   ══════════════════════════════════════════════════ */
+@media print {
+	body {
+		font-size: 10.5pt;
+	}
+	h1 {
+		margin-top: 0;
+	}
+	h2 {
+		page-break-before: always;
+		page-break-after: avoid;
+	}
+	body > h2:first-of-type {
+		page-break-before: avoid;
+	}
+	h3,
+	h4 {
+		page-break-after: avoid;
+	}
+	table {
+		page-break-inside: avoid;
+	}
+	p,
+	li {
+		orphans: 3;
+		widows: 3;
+	}
+}
+
+
+:root{color-scheme:light dark}body{margin:0;background:#f6f4ef;color:#171717;font:16px/1.55 Inter,ui-sans-serif,system-ui,sans-serif}.public-demo{max-width:1100px;margin:0 auto;padding:48px 24px}.demo-hero{min-height:420px;border-radius:32px;margin-bottom:28px;padding:52px;background:linear-gradient(135deg,rgba(0,0,0,.08),rgba(255,255,255,.55));display:flex;align-items:center}.eyebrow{letter-spacing:.15em;text-transform:uppercase;font-size:.78rem;font-weight:800;opacity:.72}.cover-title{font-size:clamp(2.4rem,7vw,5.8rem);line-height:.9;margin:.2em 0;letter-spacing:-.06em}.cover-subtitle{max-width:680px;font-size:1.15rem}.demo-section{background:rgba(255,255,255,.72);border:1px solid rgba(0,0,0,.1);border-radius:24px;padding:28px;margin:18px 0;box-shadow:0 20px 60px rgba(0,0,0,.08)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.card{border:1px solid rgba(0,0,0,.12);border-radius:18px;padding:18px;background:rgba(255,255,255,.6)}.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid rgba(0,0,0,.12);text-align:left}@media(max-width:760px){.split{grid-template-columns:1fr}.demo-hero{padding:28px}}
+
+</style>
+</head>
+<body>
+
+<main class="public-demo">
+  <section class="cover-page demo-hero">
+    <div class="cover-content">
+      <p class="eyebrow">ANONYMIZED BRAND HTML TEMPLATE</p>
+      <h1 class="cover-title">Proof-first project brief</h1>
+      <p class="cover-subtitle">A rendered, public-safe sample of a local style system. Names, logos, private paths, and source context have been removed.</p>
+      <p class="cover-author">viggomeesters-assets · design reference</p>
+      <p class="cover-date">2026</p>
+    </div>
+  </section>
+  <section class="demo-section">
+    <h2>Executive signal</h2>
+    <p>This page exists so repo browsing shows a rendered design instead of a Pandoc template with unresolved variables.</p>
+    <div class="cards">
+      <article class="card"><h3>Clarity</h3><p>Strong hierarchy, readable labels, and enough whitespace for fast scanning.</p></article>
+      <article class="card"><h3>Evidence</h3><p>Cards, tables, and callouts create a proof-first narrative.</p></article>
+      <article class="card"><h3>Reuse</h3><p>Use as visual inspiration only. Canonical public style remains viggomeesters.com.</p></article>
+    </div>
+  </section>
+  <section class="demo-section split">
+    <div><h2>System map</h2><p>Input → source-backed index → prompt contract → rendered asset.</p></div>
+    <table><thead><tr><th>Layer</th><th>Role</th></tr></thead><tbody><tr><td>Style</td><td>Palette and typography cues</td></tr><tr><td>Layout</td><td>Cards, cover, report structure</td></tr><tr><td>Safety</td><td>Anonymized public copy</td></tr></tbody></table>
+  </section>
+</main>
+
+</body>
+</html>
